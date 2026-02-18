@@ -1,0 +1,151 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spectral-temporal-curriculum-molecular-gaps"
+version = "0.1.0"
+description = "A research framework combining spectral graph wavelets with curriculum learning for molecular property prediction"
+authors = [
+    {name = "Alireza Shojaei", email = "alireza.shojaei@example.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["graph-ml", "molecular-property-prediction", "curriculum-learning", "spectral-graph-theory", "machine-learning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "torch-geometric>=2.4.0",
+    "numpy>=1.21.0",
+    "scipy>=1.9.0",
+    "scikit-learn>=1.1.0",
+    "networkx>=2.8.0",
+    "pyyaml>=6.0.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.11.0",
+    "pandas>=1.5.0",
+    "rdkit-pypi>=2022.9.1",
+    "tqdm>=4.64.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=0.991",
+    "jupyter>=1.0.0",
+    "notebook>=6.4.0",
+]
+
+mlflow = [
+    "mlflow>=2.0.0",
+    "tensorboard>=2.10.0",
+]
+
+full = [
+    "spectral-temporal-curriculum-molecular-gaps[dev,mlflow]",
+    "dgl>=1.1.0",
+    "wandb>=0.13.0",
+    "plotly>=5.10.0",
+    "numba>=0.56.0",
+]
+
+[project.urls]
+Repository = "https://github.com/alireza-shojaei/spectral-temporal-curriculum-molecular-gaps"
+Documentation = "https://github.com/alireza-shojaei/spectral-temporal-curriculum-molecular-gaps#readme"
+
+[project.scripts]
+stcmg-train = "spectral_temporal_curriculum_molecular_gaps.scripts.train:main"
+stcmg-evaluate = "spectral_temporal_curriculum_molecular_gaps.scripts.evaluate:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.coverage.run]
+source = ["src/spectral_temporal_curriculum_molecular_gaps"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py38", "py39", "py310", "py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "torch_geometric.*",
+    "dgl.*",
+    "rdkit.*",
+    "mlflow.*",
+    "wandb.*",
+    "seaborn.*",
+    "matplotlib.*",
+    "plotly.*",
+]
+ignore_missing_imports = true

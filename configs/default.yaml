@@ -1,0 +1,63 @@
+# Default configuration for Spectral Temporal Curriculum Molecular Gaps
+# This configuration defines hyperparameters for the complete training pipeline
+
+model:
+  input_dim: 9                    # Atomic feature dimension
+  hidden_dim: 256                 # Hidden layer dimension
+  num_spectral_layers: 4          # Number of spectral convolution layers
+  num_scales: 4                   # Number of spectral wavelet scales
+  num_curriculum_stages: 4        # Number of curriculum learning stages
+  dropout: 0.1                    # Dropout probability
+  pool_type: "attention"          # Graph pooling type: mean, max, add, attention
+
+training:
+  num_epochs: 100                 # Total training epochs
+  learning_rate: 0.001            # Initial learning rate
+  weight_decay: 0.01              # L2 regularization weight
+  batch_size: 32                  # Training batch size
+  num_workers: 0                  # Data loading workers (0 avoids multiprocessing deadlocks)
+  optimizer: "adamw"              # Optimizer: adamw, adam, sgd
+  lr_scheduler: "reduce_on_plateau" # LR scheduler: reduce_on_plateau, cosine, none
+  lr_factor: 0.5                  # LR reduction factor
+  lr_patience: 10                 # LR reduction patience
+  min_lr: 0.00001                 # Minimum learning rate
+  grad_clip: 1.0                  # Gradient clipping threshold
+  early_stopping_patience: 20     # Early stopping patience
+  save_frequency: 10              # Checkpoint save frequency
+  log_frequency: 100              # Logging frequency (batches)
+  stage_loss_weight: 0.1          # Weight for curriculum stage classification loss
+
+curriculum:
+  strategy: "linear"              # Curriculum strategy: linear, exponential, cosine
+  warmup_epochs: 10               # Curriculum warmup epochs
+
+data:
+  root_dir: "./data"              # Dataset root directory
+  num_spectral_scales: 4          # Number of spectral decomposition scales
+  cache_dir: null                 # Cache directory (null for auto)
+  force_reload: false             # Force reload cached features
+  curriculum_strategy: "complexity_based" # Curriculum ordering strategy
+
+experiment:
+  name: "spectral_temporal_curriculum" # MLflow experiment name
+  run_name: null                  # MLflow run name (null for auto)
+  checkpoint_dir: "checkpoints"   # Checkpoint directory
+  log_dir: "logs"                 # Log directory
+  results_dir: "results"          # Results directory
+
+reproducibility:
+  seed: 42                        # Random seed for reproducibility
+  deterministic: true             # Enable deterministic operations
+
+# Target metrics for evaluation
+target_metrics:
+  mae_homo_lumo_gap_ev: 0.075     # Target MAE for HOMO-LUMO gap (eV)
+  ood_large_molecule_mae: 0.12    # Target MAE for large molecules (OOD)
+  convergence_speedup_vs_baseline: 1.8 # Target convergence speedup
+
+# Evaluation settings
+evaluation:
+  large_molecule_threshold: 50    # Atom count threshold for large molecules
+  chemical_accuracy_threshold: 0.043 # Chemical accuracy threshold (1 kcal/mol in eV)
+  bootstrap_samples: 1000         # Bootstrap samples for confidence intervals
+  confidence_level: 0.95          # Confidence level for intervals
