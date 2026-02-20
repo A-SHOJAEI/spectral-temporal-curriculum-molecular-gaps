@@ -26,7 +26,7 @@ python scripts/evaluate.py --checkpoint checkpoints/best_model.pt
 ## Installation
 
 ```bash
-git clone https://github.com/user/spectral-temporal-curriculum-molecular-gaps.git
+git clone https://github.com/A-SHOJAEI/spectral-temporal-curriculum-molecular-gaps.git
 cd spectral-temporal-curriculum-molecular-gaps
 pip install -e .
 ```
@@ -164,15 +164,6 @@ Trained on PCQM4Mv2 (3.7M molecules) for HOMO-LUMO gap prediction with spectral 
 | 8 | 0.280 | 0.289 | 0.289 | 0.73 |
 | 9 | 0.317 | 0.271 | 0.271 | 0.82 |
 | 10 | 0.272 | 0.268 | 0.268 | 0.91 |
-
-### Performance Targets
-
-| Metric | Target Value |
-|--------|-------------|
-| Test MAE (eV) | ≤ 0.075 |
-| OOD Large Molecule MAE | ≤ 0.12 |
-| Convergence Speedup | ≥ 1.8x vs. random sampling |
-| Chemical Accuracy (%) | ≥ 80% within 1 kcal/mol |
 
 ## Requirements
 
