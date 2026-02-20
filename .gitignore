@@ -163,17 +163,18 @@ cython_debug/
 
 # Project-specific
 data/
-checkpoints/
+checkpoints/*.pth
+checkpoints/*.pt
+checkpoints/*.ckpt
 logs/
-results/
 mlruns/
 wandb/
 .hydra/
 
+# Include results
+!results/
+
 # Model files
-*.pth
-*.pt
-*.ckpt
 *.pkl
 *.pickle
 

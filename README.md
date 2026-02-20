@@ -136,7 +136,36 @@ data:
   num_spectral_scales: 4
 ```
 
-## Performance Targets
+## Results
+
+Trained on PCQM4Mv2 (3.7M molecules) for HOMO-LUMO gap prediction with spectral curriculum learning.
+
+### Test Set Metrics
+
+| Metric | Value |
+|--------|-------|
+| MAE (eV) | 0.268 |
+| RMSE (eV) | 0.379 |
+| R² | 0.908 |
+| Chemical Accuracy (%) | 11.81 |
+| Test Predictions | 73,545 |
+
+### Training History (10 epochs)
+
+| Epoch | Train Loss | Val Loss | Val MAE | Curriculum Fraction |
+|-------|-----------|----------|---------|-------------------|
+| 1 | 0.701 | 0.507 | 0.507 | 0.10 |
+| 2 | 0.471 | 0.500 | 0.500 | 0.19 |
+| 3 | 0.457 | 0.393 | 0.393 | 0.28 |
+| 4 | 0.354 | 0.300 | 0.300 | 0.37 |
+| 5 | 0.311 | 0.275 | 0.275 | 0.46 |
+| 6 | 0.351 | 0.307 | 0.307 | 0.55 |
+| 7 | 0.291 | 0.277 | 0.277 | 0.64 |
+| 8 | 0.280 | 0.289 | 0.289 | 0.73 |
+| 9 | 0.317 | 0.271 | 0.271 | 0.82 |
+| 10 | 0.272 | 0.268 | 0.268 | 0.91 |
+
+### Performance Targets
 
 | Metric | Target Value |
 |--------|-------------|

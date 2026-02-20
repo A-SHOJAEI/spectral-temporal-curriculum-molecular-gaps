@@ -1,0 +1,48 @@
+{
+  "test_metrics": {
+    "mae": 0.267899328184546,
+    "rmse": 0.3788878274397718,
+    "r2": 0.9081191121565246,
+    "chemical_accuracy": 11.814535318512476,
+    "n_predictions": 73545,
+    "n_nan": 0
+  },
+  "model": {
+    "epoch": 9,
+    "best_val_loss": 0.26797192430641403
+  },
+  "training_history": {
+    "epochs": 10,
+    "train_loss": [0.7007, 0.4714, 0.4571, 0.3538, 0.3110, 0.3512, 0.2913, 0.2805, 0.3168, 0.2717],
+    "val_loss": [0.5067, 0.5002, 0.3928, 0.2999, 0.2747, 0.3075, 0.2769, 0.2889, 0.2710, 0.2680],
+    "val_mae": [0.5066, 0.5001, 0.3927, 0.2999, 0.2747, 0.3074, 0.2768, 0.2888, 0.2709, 0.2679],
+    "curriculum_fraction": [0.10, 0.19, 0.28, 0.37, 0.46, 0.55, 0.64, 0.73, 0.82, 0.91],
+    "learning_rate": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+  },
+  "dataset": {
+    "name": "PCQM4Mv2",
+    "task": "HOMO-LUMO gap prediction",
+    "num_molecules": "3.7M",
+    "test_predictions": 73545
+  },
+  "model_config": {
+    "input_dim": 9,
+    "hidden_dim": 256,
+    "num_spectral_layers": 4,
+    "num_scales": 4,
+    "num_curriculum_stages": 4,
+    "dropout": 0.1,
+    "pool_type": "attention"
+  },
+  "training_config": {
+    "num_epochs": 100,
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 32,
+    "optimizer": "adamw",
+    "lr_scheduler": "reduce_on_plateau",
+    "early_stopping_patience": 20,
+    "grad_clip": 1.0,
+    "seed": 42
+  }
+}
